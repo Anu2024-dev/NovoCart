@@ -34,23 +34,21 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #1a4314;
 }
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+:root {
+  --primary: #2f4f34; /* green */
+  --gold: #d4b872; /* premium gold */
+  --light-bg: #faf8f2;
+}
+body {
+  background: linear-gradient(to bottom, #ffffff, #faf8f2, #f6f2e8);
+}
+button {
+  background: var(--gold);
+  color: white;
+  border-radius: 999px;
+  transition: 0.3s ease;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+button:hover {
+  background: #c5a95f;
 }

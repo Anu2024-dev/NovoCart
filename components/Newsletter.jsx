@@ -3,82 +3,106 @@
 import React, { useState, useEffect } from "react";
 
 const NewsLetter = () => {
-    const [email, setEmail] = useState("");
-    const [subscribed, setSubscribed] = useState(false);
-    const [typedText, setTypedText] = useState("");
+    const headingText = "Never Miss a Deal!";
+    const subTexts = [
+        "Get exclusive offers directly in your inbox.",
+        "Be the first to know about new arrivals.",
+        "Enjoy premium deals crafted just for you."
+    ];
 
-    const fullText = "Stay Rooted in Nature";
+    const [typedHeading, setTypedHeading] = useState("");
+    const [typedSub, setTypedSub] = useState("");
+    const [subIndex, setSubIndex] = useState(0);
 
-    // 🌿 Typing Effect
+    // ✨ HEADING TYPING
     useEffect(() => {
         let i = 0;
-        const interval = setInterval(() => {
-            setTypedText(fullText.slice(0, i + 1));
-            i++;
-            if (i >= fullText.length) clearInterval(interval);
-        }, 80);
 
-        return () => clearInterval(interval);
+        const type = () => {
+            if (i <= headingText.length) {
+                setTypedHeading(headingText.slice(0, i));
+                i++;
+                setTimeout(type, 80);
+            }
+        };
+
+        type();
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!email) return;
+    // ✨ SUBTEXT TYPING LOOP
+    useEffect(() => {
+        let i = 0;
+        let current = subTexts[subIndex];
 
-        setSubscribed(true);
-        setEmail("");
+        const type = () => {
+            if (i <= current.length) {
+                setTypedSub(current.slice(0, i));
+                i++;
+                setTimeout(type, 35);
+            } else {
+                setTimeout(() => {
+                    setTypedSub("");
+                    setSubIndex((prev) => (prev + 1) % subTexts.length);
+                }, 2000);
+            }
+        };
 
-        setTimeout(() => setSubscribed(false), 3000);
-    };
+        type();
+    }, [subIndex]);
 
     return (
-        <section className="relative mt-28 py-24 px-4 text-center overflow-hidden">
+        <section className="relative mt-20 py-28 px-4 text-center overflow-hidden">
 
-            {/* 🌿 Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#f5f3ea] via-[#e8e1d3] to-[#f0ead6] -z-10"></div>
+            {/* 🌿 ULTRA SMOOTH BLEND BACKGROUND */}
+            <div className="absolute inset-0 -z-10 
+                bg-gradient-to-b from-white via-white to-[#f8f5ee]" />
 
-            {/* 🌿 Glow Effect */}
-            <div className="absolute w-[350px] h-[350px] bg-[#6b8f71]/20 blur-3xl rounded-full top-10 left-1/2 -translate-x-1/2 animate-pulse"></div>
+            {/* 🌿 SOFT GOLD LIGHT */}
+            <div className="absolute w-[700px] h-[350px] 
+                bg-[#D4B872]/15 blur-[180px] 
+                top-0 left-1/2 -translate-x-1/2 animate-pulse" />
 
-            {/* 🌿 Heading */}
-            <h1 className="text-3xl md:text-5xl font-bold text-[#2f4f34]">
-                {typedText}
-                <span className="animate-pulse ml-1 text-[#6b8f71]">|</span>
+            {/* 🌿 EXTRA SOFT GLOW */}
+            <div className="absolute w-[500px] h-[250px] 
+                bg-[#D4B872]/10 blur-[200px] 
+                bottom-0 left-1/2 -translate-x-1/2" />
+
+            {/* 🌿 HEADING */}
+            <h1 className="text-3xl md:text-5xl font-semibold text-[#1f3a28] tracking-tight">
+                {typedHeading}
+                <span className="ml-1 text-[#D4B872] animate-pulse">|</span>
             </h1>
 
-            {/* 🌿 Subtext */}
-            <p className="text-[#5c6f5c] mt-4 mb-10 text-base md:text-lg max-w-xl mx-auto">
-                Get eco-friendly deals, bamboo products, and handcrafted collections directly in your inbox.
+            {/* 🌿 SUBTEXT (Typing Animation) */}
+            <p className="mt-6 mb-12 text-gray-500 text-base md:text-lg h-6">
+                {typedSub}
+                <span className="ml-1 text-[#D4B872] animate-pulse">|</span>
             </p>
 
-            {/* 🌿 Form */}
-            <form
-                onSubmit={handleSubmit}
-                className="max-w-2xl mx-auto flex items-center rounded-full overflow-hidden border border-[#d6d0c4] bg-white shadow-md"
-            >
+            {/* 🌿 INPUT */}
+            <div className="max-w-2xl mx-auto flex items-center rounded-full overflow-hidden 
+                bg-white/90 backdrop-blur-md 
+                shadow-[0_10px_40px_rgba(0,0,0,0.06)] 
+                border border-[#eee6d3]
+                hover:shadow-[0_15px_50px_rgba(212,184,114,0.2)]
+                transition duration-500">
+
                 <input
                     type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="flex-1 px-6 py-4 outline-none text-[#2f4f34] bg-transparent"
+                    placeholder="Enter your email id"
+                    className="flex-1 px-6 py-4 outline-none bg-transparent text-[#2f4f34]"
                 />
 
-                <button
-                    type="submit"
-                    className="px-8 py-4 bg-[#2f4f34] text-white font-medium hover:bg-[#1f3a28] transition duration-300"
-                >
+                {/* 🌿 GOLD BUTTON */}
+                <button className="px-8 py-4 bg-[#D4B872] text-white font-medium 
+                    hover:bg-[#c5a95f] transition duration-300">
                     Subscribe →
                 </button>
-            </form>
+            </div>
 
-            {/* 🌿 Success Message */}
-            {subscribed && (
-                <p className="mt-5 text-[#2f4f34] font-medium animate-bounce">
-                    Subscribed successfully!
-                </p>
-            )}
+            {/* 🌿 BOTTOM FADE (MERGE EFFECT) */}
+            <div className="absolute bottom-0 left-0 w-full h-40 
+                bg-gradient-to-b from-transparent to-[#f8f5ee]" />
         </section>
     );
 };
