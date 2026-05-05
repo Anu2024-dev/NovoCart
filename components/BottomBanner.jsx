@@ -30,7 +30,7 @@ export default function BottomBanner() {
 
                 {/* 🌿 BACKGROUND IMAGE (USE YOUR FOLDER) */}
                 <Image
-                    src="/images/hero.jpeg"   // 👈 from your folder
+                    src="/images/bottom.jpg"
                     alt="Bamboo Background"
                     fill
                     className="object-cover"
@@ -54,7 +54,7 @@ export default function BottomBanner() {
                     {/* 🌿 RIGHT CONTENT */}
                     <div>
                         <h2 className="text-3xl md:text-4xl font-bold text-[#2f4a2c] mb-6">
-                            Why Choose Bamboo 🌿
+                            Why Choose Bamboo
                         </h2>
 
                         {features.map((item, index) => (

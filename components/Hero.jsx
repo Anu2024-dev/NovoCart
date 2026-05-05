@@ -8,7 +8,7 @@ import Image from "next/image";
 const bgImages = [
   "/images/hero.jpeg",
   "/images/bg_image.jpg",
-  "/images/img9.jpg",
+  "/images/bg2.jpg",
 ];
 
 const typingTexts = [
