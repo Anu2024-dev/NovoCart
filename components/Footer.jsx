@@ -1,59 +1,104 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function Footer() {
+const Footer = () => {
+
+  // 🌿 Bamboo brand texts
+  const texts = [
+    "We create handcrafted bamboo products that bring nature closer to your home. Sustainable, elegant, and made with care.",
+    "From eco-friendly decor to functional bamboo crafts, every piece is designed to blend tradition with modern living.",
+    "Natural. Sustainable. Beautiful — crafted from bamboo for a better lifestyle."
+  ];
+
+  const [textIndex, setTextIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [charIndex, setCharIndex] = useState(0);
+
+  // 🌿 Typing Animation
+  useEffect(() => {
+    if (charIndex < texts[textIndex].length) {
+      const timeout = setTimeout(() => {
+        setTypedText((prev) => prev + texts[textIndex][charIndex]);
+        setCharIndex((prev) => prev + 1);
+      }, 35);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setTimeout(() => {
+        setTypedText("");
+        setCharIndex(0);
+        setTextIndex((prev) => (prev + 1) % texts.length);
+      }, 2500);
+    }
+  }, [charIndex, textIndex]);
+
   return (
-    <footer className="bg-[#1A4314] text-white pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 md:col-span-1">
-            <h2 className="text-2xl font-bold tracking-tight mb-6 flex items-center gap-2">
-              Novo<span className="text-[#D4B872]">cart</span>
-            </h2>
-            <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Sustainable, handcrafted bamboo products to elevate your everyday living spaces. Nature meets modern design.
-            </p>
-          </div>
-          
+    <footer className="mt-24 bg-[#f5f0e6] text-[#3e5c3a] px-6 md:px-16 lg:px-24 xl:px-32">
+
+      {/* 🌿 Top Section */}
+      <div className="flex flex-col md:flex-row justify-between gap-12 py-12 border-b border-[#d6c7a1]/40">
+
+        {/* 🌿 Brand */}
+        <div className="max-w-md">
+
+          {/* Logo */}
+          <h1 className="text-2xl font-bold tracking-tight">
+            Bamboo<span className="text-[#b89b5e]">Craft</span>
+          </h1>
+
+          {/* Typing Text */}
+          <p className="mt-6 leading-relaxed text-[#5a5a5a]">
+            {typedText}
+            <span className="ml-1 animate-pulse text-[#3e5c3a]">|</span>
+          </p>
+        </div>
+
+        {/* 🌿 Links */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 text-sm">
+
+          {/* Shop */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Shop</h3>
-            <ul className="space-y-4 text-white/70 text-sm">
-              <li><Link href="/collection/all" className="hover:text-[#D4B872] transition-colors">All Products</Link></li>
-              <li><Link href="/collection/lamps-lighting" className="hover:text-[#D4B872] transition-colors">Lamps & Lighting</Link></li>
-              <li><Link href="/collection/home-decor" className="hover:text-[#D4B872] transition-colors">Home Decor</Link></li>
-              <li><Link href="/collection/kitchen-dining" className="hover:text-[#D4B872] transition-colors">Kitchen & Dining</Link></li>
+            <h3 className="font-semibold text-[#2f4a2c] mb-4">Shop</h3>
+            <ul className="space-y-2">
+              <li><Link href="/collection/lamps-lighting" className="hover:text-[#b89b5e] transition">Lamps</Link></li>
+              <li><Link href="/collection/home-decor" className="hover:text-[#b89b5e] transition">Home Decor</Link></li>
+              <li><Link href="/collection/kitchen-dining" className="hover:text-[#b89b5e] transition">Kitchen</Link></li>
             </ul>
           </div>
-          
+
+          {/* Company */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Help</h3>
-            <ul className="space-y-4 text-white/70 text-sm">
-              <li><a href="#" className="hover:text-[#D4B872] transition-colors">Track Order</a></li>
-              <li><a href="#" className="hover:text-[#D4B872] transition-colors">Returns & Exchanges</a></li>
-              <li><a href="#" className="hover:text-[#D4B872] transition-colors">Shipping Info</a></li>
-              <li><a href="#" className="hover:text-[#D4B872] transition-colors">Contact Us</a></li>
+            <h3 className="font-semibold text-[#2f4a2c] mb-4">Company</h3>
+            <ul className="space-y-2">
+              <li><Link href="/" className="hover:text-[#b89b5e] transition">About Us</Link></li>
+              <li><Link href="/" className="hover:text-[#b89b5e] transition">Sustainability</Link></li>
+              <li><Link href="/" className="hover:text-[#b89b5e] transition">Contact</Link></li>
             </ul>
           </div>
-          
+
+          {/* Support */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Newsletter</h3>
-            <p className="text-white/70 text-sm mb-4">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
-            <div className="flex items-center">
-              <input type="email" placeholder="Enter your email" className="bg-white/10 border border-white/20 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:border-[#D4B872] w-full" />
-              <button className="bg-[#D4B872] text-[#1A4314] px-4 py-2 rounded-r-lg font-bold hover:bg-[#E8D595] transition-colors">
-                Subscribe
-              </button>
-            </div>
+            <h3 className="font-semibold text-[#2f4a2c] mb-4">Support</h3>
+            <ul className="space-y-2">
+              <li><Link href="/" className="hover:text-[#b89b5e] transition">FAQs</Link></li>
+              <li><Link href="/" className="hover:text-[#b89b5e] transition">Shipping</Link></li>
+              <li><Link href="/" className="hover:text-[#b89b5e] transition">Returns</Link></li>
+            </ul>
           </div>
+
         </div>
-        
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50">
-          <p>&copy; {new Date().getFullYear()} Novocart. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-          </div>
-        </div>
+      </div>
+
+      {/* 🌿 Bottom */}
+      <div className="py-6 text-center text-sm text-[#6b6b6b]">
+        © {new Date().getFullYear()}
+        <span className="text-[#3e5c3a] font-medium"> BambooCraft</span>.
+        All rights reserved.
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

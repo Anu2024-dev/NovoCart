@@ -1,127 +1,90 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Star } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import { Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 const CATEGORIES = [
-  { id: 1, title: "Lamps & Lighting", image: "/images/bamboo-craft-05.jpg" },
-  { id: 2, title: "Home Decor", image: "/images/bamboo-craft-06.jpg" },
-  { id: 3, title: "Kitchen & Dining", image: "/images/bamboo-craft-07.jpg" },
+  { id: 1, name: "Home Decor", image: "/images/bamboo-craft-06.jpg" },
+  { id: 2, name: "Kitchen & Dining", image: "/images/bamboo-craft-07.jpg" },
+  { id: 3, name: "Lighting", image: "/images/bamboo-craft-05.jpg" },
+  { id: 4, name: "Furniture", image: "/images/bamboo-craft-08.jpg" },
+  { id: 5, name: "Storage", image: "/images/bamboo-craft-09.jpg" },
+  { id: 6, name: "Planters", image: "/images/bamboo-craft-03.jpg" },
+  { id: 7, name: "Accessories", image: "/images/bamboo-craft-10.jpg" },
 ];
 
-const PRODUCTS = [
-  { id: 1, name: "Bamboo Pendant Light", price: "$85.00", category: "Lamps & Lighting", rating: 4.8, image: "/images/bamboo-craft-01.jpg" },
-  { id: 2, name: "Woven Fruit Basket", price: "$32.00", category: "Kitchen & Dining", rating: 4.9, image: "/images/bamboo-craft-02.jpg" },
-  { id: 3, name: "Minimalist Planter", price: "$45.00", category: "Home Decor", rating: 4.7, image: "/images/bamboo-craft-03.jpg" },
-  { id: 4, name: "Dining Mat Set", price: "$28.00", category: "Kitchen & Dining", rating: 5.0, image: "/images/bamboo-craft-04.jpg" },
+const BEST_SELLERS = [
+  { id: 1, name: "Bamboo Pendant Light", price: "$85.00", oldPrice: "$110.00", rating: 4.8, image: "/images/bamboo-craft-01.jpg" },
+  { id: 2, name: "Woven Fruit Basket", price: "$32.00", oldPrice: "$45.00", rating: 4.9, image: "/images/bamboo-craft-02.jpg" },
+  { id: 3, name: "Minimalist Planter", price: "$45.00", oldPrice: "$55.00", rating: 4.7, image: "/images/bamboo-craft-03.jpg" },
+  { id: 4, name: "Dining Mat Set", price: "$28.00", oldPrice: "$35.00", rating: 5.0, image: "/images/bamboo-craft-04.jpg" },
 ];
+
+// Framer Motion Variants for Pro Animations
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+};
 
 export default function NewCollections() {
   return (
-    <section className="py-24 bg-white relative">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-12 overflow-hidden">
+      {/* Categories Section */}
+      <section className="mb-20">
+        <motion.h2 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-extrabold text-[#1A4314] mb-8"
+        >
+          Collection
+        </motion.h2>
         
-        {/* Categories Section */}
-        <div className="mb-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
-          >
-            <div>
-              <h2 className="text-sm font-bold tracking-widest text-[#D4B872] uppercase mb-2">Shop by Category</h2>
-              <h3 className="text-4xl font-extrabold text-[#2D2D2D]">Explore Collections</h3>
-            </div>
-            <Link href="/collection/all" className="text-[#1A4314] font-medium flex items-center gap-2 hover:gap-3 transition-all">
-              View All Categories <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {CATEGORIES.map((cat, index) => (
-              <motion.div
-                key={cat.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="rounded-3xl p-8 cursor-pointer group relative overflow-hidden transition-all duration-300 min-h-[300px] flex flex-col justify-end shadow-md hover:shadow-xl"
-              >
-                <Image src={cat.image} alt={cat.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                
-                <div className="relative z-10 flex items-end justify-between">
-                  <div>
-                    <h4 className="text-2xl font-bold text-white mb-1">{cat.title}</h4>
-                    <p className="text-white/80 text-sm">Handcrafted essentials</p>
-                  </div>
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1A4314] opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg shrink-0">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* New Arrivals Section */}
-        <div>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-sm font-bold tracking-widest text-[#1A4314] uppercase mb-2">Just Landed</h2>
-            <h3 className="text-4xl font-extrabold text-[#2D2D2D]">New Arrivals</h3>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PRODUCTS.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <div className="relative aspect-[4/5] bg-[#F9F6F0] rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
-                  <Image 
-                    src={product.image} 
-                    alt={product.name} 
-                    fill 
-                    className="object-cover group-hover:scale-110 transition-transform duration-700" 
-                  />
-                  <div className="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-colors duration-300"></div>
-                  
-                  {/* Quick Add Button */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <button className="bg-[#1A4314] text-white px-6 py-2 rounded-full font-medium shadow-lg hover:bg-[#2E5339]">
-                      Quick Add
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="px-2">
-                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">{product.category}</p>
-                  <div className="flex items-start justify-between gap-2">
-                    <h4 className="text-lg font-bold text-[#2D2D2D] line-clamp-1">{product.name}</h4>
-                    <div className="flex items-center gap-1 text-sm font-medium text-[#D4B872]">
-                      <Star className="w-3 h-3 fill-current" /> {product.rating}
-                    </div>
-                  </div>
-                  <p className="text-[#1A4314] font-semibold mt-1">{product.price}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+        {/* Categories Flex Container with horizontal scroll on small screens */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="flex gap-4 md:gap-6 overflow-x-auto pb-8 pt-4 scrollbar-hide px-2"
+        >
+          {CATEGORIES.map((cat) => (
+            <motion.div
+              key={cat.id}
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.03 }}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer flex-shrink-0 w-[140px] h-[160px] rounded-[24px] flex flex-col items-center justify-center p-4 relative bg-white border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(26,67,20,0.12)] hover:border-[#1A4314]/20 transition-all duration-300 group"
+            >
+              <div className="w-20 h-20 rounded-full bg-[#F9F6F0] mb-3 relative flex items-center justify-center overflow-hidden shadow-inner group-hover:bg-[#E8F0E6] transition-colors duration-500">
+                 <div className="relative w-16 h-16 transform group-hover:scale-110 transition-transform duration-500">
+                   <Image 
+                     src={cat.image} 
+                     alt={cat.name} 
+                     fill 
+                     className="object-cover rounded-full drop-shadow-sm"
+                     onError={(e) => {
+                       e.currentTarget.src = "/images/bg_image.jpg";
+                     }}
+                   />
+                 </div>
+              </div>
+              <span className="text-xs font-bold text-center z-10 text-gray-600 group-hover:text-[#1A4314] transition-colors duration-300">
+                {cat.name}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+    </div>
   );
 }
