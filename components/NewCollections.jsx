@@ -5,13 +5,13 @@ import { Star } from "lucide-react";
 import { motion } from "framer-motion";
 
 const CATEGORIES = [
-  { id: 1, name: "Home Decor", image: "/images/bamboo-craft-06.jpg" },
-  { id: 2, name: "Kitchen & Dining", image: "/images/bamboo-craft-07.jpg" },
-  { id: 3, name: "Lighting", image: "/images/bamboo-craft-05.jpg" },
-  { id: 4, name: "Furniture", image: "/images/bamboo-craft-08.jpg" },
-  { id: 5, name: "Storage", image: "/images/bamboo-craft-09.jpg" },
-  { id: 6, name: "Planters", image: "/images/bamboo-craft-03.jpg" },
-  { id: 7, name: "Accessories", image: "/images/bamboo-craft-10.jpg" },
+  { id: 1, name: "Home Decor", image: "/images/bamboo-craft-27.jpg" },
+  { id: 2, name: "Kitchen & Dining", image: "/images/bamboo-craft-17.jpg" },
+  { id: 3, name: "Lighting", image: "/images/bamboo-craft-02.jpg" },
+  { id: 4, name: "Furniture", image: "/images/img7.jpg" },
+  { id: 5, name: "Storage", image: "/images/bamboo-craft-40.jpg" },
+  { id: 6, name: "Planters", image: "/images/bamboo-craft-44.jpg" },
+  { id: 7, name: "Accessories", image: "/images/img5.jpg" },
 ];
 
 const BEST_SELLERS = [
@@ -40,7 +40,7 @@ export default function NewCollections() {
     <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-12 overflow-hidden">
       {/* Categories Section */}
       <section className="mb-20">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -48,9 +48,9 @@ export default function NewCollections() {
         >
           Collection
         </motion.h2>
-        
+
         {/* Categories Flex Container with horizontal scroll on small screens */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -66,17 +66,17 @@ export default function NewCollections() {
               className="cursor-pointer flex-shrink-0 w-[140px] h-[160px] rounded-[24px] flex flex-col items-center justify-center p-4 relative bg-white border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(26,67,20,0.12)] hover:border-[#1A4314]/20 transition-all duration-300 group"
             >
               <div className="w-20 h-20 rounded-full bg-[#F9F6F0] mb-3 relative flex items-center justify-center overflow-hidden shadow-inner group-hover:bg-[#E8F0E6] transition-colors duration-500">
-                 <div className="relative w-16 h-16 transform group-hover:scale-110 transition-transform duration-500">
-                   <Image 
-                     src={cat.image} 
-                     alt={cat.name} 
-                     fill 
-                     className="object-cover rounded-full drop-shadow-sm"
-                     onError={(e) => {
-                       e.currentTarget.src = "/images/bg_image.jpg";
-                     }}
-                   />
-                 </div>
+                <div className="relative w-16 h-16 transform group-hover:scale-110 transition-transform duration-500">
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    fill
+                    className="object-cover rounded-full drop-shadow-sm"
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/bg_image.jpg";
+                    }}
+                  />
+                </div>
               </div>
               <span className="text-xs font-bold text-center z-10 text-gray-600 group-hover:text-[#1A4314] transition-colors duration-300">
                 {cat.name}
